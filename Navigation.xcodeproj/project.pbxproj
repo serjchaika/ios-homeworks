@@ -7,17 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		360542DC29A76EBC0055BC26 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360542DB29A76EBC0055BC26 /* ProfileHeaderView.swift */; };
+		360542DE29A76EED0055BC26 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360542DD29A76EED0055BC26 /* ProfileViewController.swift */; };
+		360542E229AA574C0055BC26 /* Additional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360542E129AA574C0055BC26 /* Additional.swift */; };
 		363AE5C32997B27400D6B0CC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363AE5C22997B27400D6B0CC /* AppDelegate.swift */; };
 		363AE5C52997B27400D6B0CC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363AE5C42997B27400D6B0CC /* SceneDelegate.swift */; };
 		363AE5CC2997B27400D6B0CC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 363AE5CB2997B27400D6B0CC /* Assets.xcassets */; };
 		363AE5CF2997B27400D6B0CC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 363AE5CD2997B27400D6B0CC /* LaunchScreen.storyboard */; };
 		363AE62129A2478200D6B0CC /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363AE62029A2478200D6B0CC /* FeedViewController.swift */; };
-		363AE62329A2479F00D6B0CC /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363AE62229A2479F00D6B0CC /* ProfileViewController.swift */; };
 		363AE62529A247F600D6B0CC /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363AE62429A247F600D6B0CC /* PostViewController.swift */; };
 		363AE62729A2484000D6B0CC /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363AE62629A2484000D6B0CC /* InfoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		360542DB29A76EBC0055BC26 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		360542DD29A76EED0055BC26 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		360542E129AA574C0055BC26 /* Additional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Additional.swift; sourceTree = "<group>"; };
 		363AE5BF2997B27400D6B0CC /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		363AE5C22997B27400D6B0CC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		363AE5C42997B27400D6B0CC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -25,7 +30,6 @@
 		363AE5CE2997B27400D6B0CC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		363AE5D02997B27400D6B0CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		363AE62029A2478200D6B0CC /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
-		363AE62229A2479F00D6B0CC /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		363AE62429A247F600D6B0CC /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		363AE62629A2484000D6B0CC /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -41,6 +45,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		360542DA29A76E7E0055BC26 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				360542DB29A76EBC0055BC26 /* ProfileHeaderView.swift */,
+				360542DD29A76EED0055BC26 /* ProfileViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		360542DF29A879250055BC26 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				363AE5C22997B27400D6B0CC /* AppDelegate.swift */,
+				363AE5C42997B27400D6B0CC /* SceneDelegate.swift */,
+				360542E129AA574C0055BC26 /* Additional.swift */,
+				363AE5CB2997B27400D6B0CC /* Assets.xcassets */,
+				363AE5CD2997B27400D6B0CC /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		360542E029A879560055BC26 /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				363AE62029A2478200D6B0CC /* FeedViewController.swift */,
+				363AE62429A247F600D6B0CC /* PostViewController.swift */,
+				363AE62629A2484000D6B0CC /* InfoViewController.swift */,
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
 		363AE5B62997B27300D6B0CC = {
 			isa = PBXGroup;
 			children = (
@@ -60,14 +95,9 @@
 		363AE5C12997B27400D6B0CC /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
-				363AE5C22997B27400D6B0CC /* AppDelegate.swift */,
-				363AE5C42997B27400D6B0CC /* SceneDelegate.swift */,
-				363AE62029A2478200D6B0CC /* FeedViewController.swift */,
-				363AE62429A247F600D6B0CC /* PostViewController.swift */,
-				363AE62629A2484000D6B0CC /* InfoViewController.swift */,
-				363AE62229A2479F00D6B0CC /* ProfileViewController.swift */,
-				363AE5CB2997B27400D6B0CC /* Assets.xcassets */,
-				363AE5CD2997B27400D6B0CC /* LaunchScreen.storyboard */,
+				360542DF29A879250055BC26 /* Resources */,
+				360542DA29A76E7E0055BC26 /* Profile */,
+				360542E029A879560055BC26 /* Feed */,
 				363AE5D02997B27400D6B0CC /* Info.plist */,
 			);
 			path = Navigation;
@@ -145,9 +175,11 @@
 			files = (
 				363AE5C32997B27400D6B0CC /* AppDelegate.swift in Sources */,
 				363AE62129A2478200D6B0CC /* FeedViewController.swift in Sources */,
-				363AE62329A2479F00D6B0CC /* ProfileViewController.swift in Sources */,
 				363AE5C52997B27400D6B0CC /* SceneDelegate.swift in Sources */,
+				360542DC29A76EBC0055BC26 /* ProfileHeaderView.swift in Sources */,
+				360542E229AA574C0055BC26 /* Additional.swift in Sources */,
 				363AE62729A2484000D6B0CC /* InfoViewController.swift in Sources */,
+				360542DE29A76EED0055BC26 /* ProfileViewController.swift in Sources */,
 				363AE62529A247F600D6B0CC /* PostViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
