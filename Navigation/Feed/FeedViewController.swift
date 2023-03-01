@@ -21,12 +21,8 @@ final class FeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Feed"
-        view.backgroundColor = .systemGray5
+        view.backgroundColor = .white
         makeUI()
-    }
-
-    struct Post {
-        var title: String
     }
 
     func makeUI() {

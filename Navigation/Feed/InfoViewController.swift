@@ -1,6 +1,6 @@
 import UIKit
 
-class InfoViewController: UIViewController {
+final class InfoViewController: UIViewController {
 
     private let alertButton: UIButton = {
         let button = UIButton()

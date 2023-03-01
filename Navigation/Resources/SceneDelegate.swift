@@ -17,7 +17,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let appViewControllers = [feedTabBarController, profileTabBarController]
 
-        appViewControllers.forEach({ $0.navigationBar.prefersLargeTitles = true })
+        //appViewControllers.forEach({ $0.navigationBar.prefersLargeTitles = true })
+        feedTabBarController.navigationBar.prefersLargeTitles = true
 
         tabBarController.viewControllers = appViewControllers
 
@@ -31,13 +32,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             image: UIImage(systemName: "person.crop.square"),
             tag: 1
         )
-
+        tabBarController.tabBar.backgroundColor = .white        
         tabBarController.selectedIndex = 0
 
         window.rootViewController = tabBarController
         window.makeKeyAndVisible()
         self.window = window
-
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
