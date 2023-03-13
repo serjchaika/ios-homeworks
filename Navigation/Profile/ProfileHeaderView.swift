@@ -2,31 +2,17 @@ import UIKit
 
 final class ProfileHeaderView: UIView {
 
-    private lazy var moduleSize: CGFloat = {
-        let size: CGFloat
-        size = 16.0
-        return size
-    }()
-
-    private lazy var imageSize: CGFloat = {
-        let size: CGFloat
-        size = moduleSize * 6.0
-        return size
-    }()
-
     private lazy var imageContent: UIImage! = {
         let image = UIImage(named: "ProfileImage")
         return image
     }()
 
     private lazy var userStatus: String = ""
-    private lazy var userStatusPlaceholder: String = "Your status is..."
 
     private lazy var imageView: UIImageView = {
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: imageSize, height: imageSize))
+        let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = imageContent
-        imageView.layer.cornerRadius = imageView.frame.size.height / 2
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         imageView.layer.borderWidth = 3
@@ -35,7 +21,7 @@ final class ProfileHeaderView: UIView {
     }()
 
     private lazy var nameLabel: UILabel = {
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 300, height: bounds.height))
+        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Carlo Brooney"
         label.font = UIFont.systemFont(ofSize: 18.0, weight: .bold)
@@ -44,17 +30,16 @@ final class ProfileHeaderView: UIView {
     }()
 
     private lazy var statusLabel: UILabel = {
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 300, height: bounds.height))
+        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-//        label.text = "Becаme a doctor"
-        label.text = userStatusPlaceholder
+        label.text = Constants.userStatusPlaceholder
         label.font = UIFont.systemFont(ofSize: 14.0, weight: .regular)
         label.textColor = .gray
         return label
     }()
 
     private lazy var statusButton: UIButton = {
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 50))
+        let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Set status", for: .normal)
         button.setTitleColor(.white, for: .normal)
@@ -104,36 +89,76 @@ final class ProfileHeaderView: UIView {
         addSubview(statusTextEdit)
 
         NSLayoutConstraint.activate([
-            imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: moduleSize),
-            imageView.topAnchor.constraint(equalTo: topAnchor, constant: moduleSize),
-            imageView.heightAnchor.constraint(equalToConstant: imageSize),
-            imageView.widthAnchor.constraint(equalToConstant: imageSize),
+            imageView.leadingAnchor.constraint(
+                equalTo: leadingAnchor,
+                constant: Constants.moduleSize
+            ),
+            imageView.topAnchor.constraint(
+                equalTo: topAnchor,
+                constant: Constants.moduleSize
+            ),
+            imageView.heightAnchor.constraint(
+                equalToConstant: Constants.imageSize
+            ),
+            imageView.widthAnchor.constraint(
+                equalToConstant: Constants.imageSize
+            ),
 
-            nameLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: moduleSize),
-            nameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 27.0),
+            nameLabel.leadingAnchor.constraint(
+                equalTo: imageView.trailingAnchor,
+                constant: Constants.moduleSize
+            ),
+            nameLabel.topAnchor.constraint(
+                equalTo: topAnchor,
+                constant: 27.0
+            ),
 
-            statusLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
-//            statusLabel.bottomAnchor.constraint(equalTo: statusButton.topAnchor, constant: -34.0),
-            statusLabel.bottomAnchor.constraint(equalTo: imageView.bottomAnchor, constant: -moduleSize - 2),
+            statusLabel.leadingAnchor.constraint(
+                equalTo: nameLabel.leadingAnchor
+            ),
+            statusLabel.bottomAnchor.constraint(
+                equalTo: imageView.bottomAnchor,
+                constant: -Constants.moduleSize - 2
+            ),
 
-            statusButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: moduleSize),
-            statusButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -moduleSize),
-//            statusButton.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: moduleSize),
-            statusButton.topAnchor.constraint(equalTo: statusTextEdit.bottomAnchor, constant: moduleSize),
-            statusButton.heightAnchor.constraint(equalToConstant: 50.0),
+            statusButton.leadingAnchor.constraint(
+                equalTo: leadingAnchor,
+                constant: Constants.moduleSize
+            ),
+            statusButton.trailingAnchor.constraint(
+                equalTo: trailingAnchor,
+                constant: -Constants.moduleSize
+            ),
+            statusButton.topAnchor.constraint(
+                equalTo: statusTextEdit.bottomAnchor,
+                constant: Constants.moduleSize
+            ),
+            statusButton.heightAnchor.constraint(
+                equalToConstant: 50.0
+            ),
 
-            statusTextEdit.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
-            statusTextEdit.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -moduleSize),
-            statusTextEdit.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: moduleSize / 2),
-            statusTextEdit.heightAnchor.constraint(equalToConstant: 40.0)
-
+            statusTextEdit.leadingAnchor.constraint(
+                equalTo: nameLabel.leadingAnchor
+            ),
+            statusTextEdit.trailingAnchor.constraint(
+                equalTo: trailingAnchor,
+                constant: -Constants.moduleSize
+            ),
+            statusTextEdit.topAnchor.constraint(
+                equalTo: statusLabel.bottomAnchor,
+                constant: Constants.moduleSize / 2
+            ),
+            statusTextEdit.heightAnchor.constraint(
+                equalToConstant: 40.0
+            )
         ])
+
+        imageView.layer.cornerRadius = Constants.imageSize / 2
     }
 
     @objc func buttonPressed() {
-//        print(statusLabel.text!)
         if userStatus.isEmpty {
-            statusLabel.text = userStatusPlaceholder
+            statusLabel.text = Constants.userStatusPlaceholder
         } else {
             statusLabel.text = userStatus
         }
