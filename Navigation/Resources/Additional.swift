@@ -4,6 +4,18 @@ struct Post {
     var title: String
 }
 
+struct Constants {
+    static let moduleSize: CGFloat = 16.0
+    static var imageSize: CGFloat = {
+        let size: CGFloat
+        size = moduleSize * 6.0
+        return size
+    }()
+    static let userStatusPlaceholder: String = "Your status is..."
+    static let profileTitle: String = "Profile"
+    static let feedTitle: String = "Feed"
+}
+
 class TextFieldWithPadding: UITextField {
     var textPadding = UIEdgeInsets(
         top: 10,
