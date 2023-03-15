@@ -12,37 +12,73 @@ final class FeedViewController: UIViewController {
 
         button.setTitle("Read more", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
 
         return button
+    }()
 
+    private let getAnotherPostButton: UIButton = {
+        let button = UIButton()
+
+        if #available(iOS 15.0, *) {
+            button.configuration = .filled()
+            button.configuration?.baseBackgroundColor = .black
+        } else {  }
+
+        button.setTitle("Read one more", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+
+        return button
+    }()
+
+
+    private lazy var buttonStackView: UIStackView = {
+        let stackView = UIStackView()
+
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.clipsToBounds = true
+
+        stackView.axis = .vertical
+        stackView.distribution = .fillEqually
+        stackView.alignment = .fill
+        stackView.spacing = 10.0
+
+        stackView.addArrangedSubview(self.getPostButton)
+        stackView.addArrangedSubview(self.getAnotherPostButton)
+
+        return stackView
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Feed"
+        title = Constants.feedTitle
         view.backgroundColor = .white
+
+        view.addSubview(buttonStackView)
+
+        getPostButton.addTarget(
+            self,
+            action: #selector(postButtonPressed(_:)),
+            for: .touchUpInside
+        )
+        getAnotherPostButton.addTarget(
+            self,
+            action: #selector(postButtonPressed(_:)),
+            for: .touchUpInside
+        )
+
         makeUI()
     }
 
-    func makeUI() {
-        view.addSubview(getPostButton)
-
+    private func makeUI() {
         let safeAreaLayoutGuide = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
-            getPostButton.topAnchor.constraint(
-                equalTo: safeAreaLayoutGuide.topAnchor,
-                constant: 24
+            buttonStackView.centerXAnchor.constraint(
+                equalTo: safeAreaLayoutGuide.centerXAnchor
             ),
-            getPostButton.leadingAnchor.constraint(
-                equalTo: safeAreaLayoutGuide.leadingAnchor,
-                constant: 16
-            ),
-            getPostButton.widthAnchor.constraint(equalToConstant: 140),
-            getPostButton.heightAnchor.constraint(equalToConstant: 36)
+            buttonStackView.centerYAnchor.constraint(
+                equalTo: safeAreaLayoutGuide.centerYAnchor
+            )
         ])
-
-        getPostButton.addTarget(self, action: #selector(postButtonPressed(_:)), for: .touchUpInside)
     }
 
     @objc private func postButtonPressed(_ sender: UIButton) {
