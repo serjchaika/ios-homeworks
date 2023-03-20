@@ -13,7 +13,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let tabBarController = UITabBarController()
 
         let feedTabBarController = UINavigationController(rootViewController: FeedViewController())
-        let profileTabBarController = UINavigationController(rootViewController: ProfileViewController())
+        let profileTabBarController = UINavigationController(rootViewController: LogInViewController())
 
         let appViewControllers = [feedTabBarController, profileTabBarController]
 
@@ -23,12 +23,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         tabBarController.viewControllers = appViewControllers
 
         feedTabBarController.tabBarItem = UITabBarItem(
-            title: "Feed",
+            title: Constants.feedTitle,
             image: UIImage(systemName: "square.text.square"),
             tag: 0
         )
         profileTabBarController.tabBarItem = UITabBarItem(
-            title: "Profile",
+            title: Constants.profileTitle,
             image: UIImage(systemName: "person.crop.square"),
             tag: 1
         )
@@ -36,8 +36,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         tabBarController.selectedIndex = 0
 
         window.rootViewController = tabBarController
-        window.makeKeyAndVisible()
         self.window = window
+
+        window.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
