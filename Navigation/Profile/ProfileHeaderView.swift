@@ -2,6 +2,8 @@ import UIKit
 
 final class ProfileHeaderView: UIView {
 
+    // MARK: - Subviews
+
     private lazy var imageContent: UIImage! = {
         let image = UIImage(named: "ProfileImage")
         return image
@@ -12,36 +14,44 @@ final class ProfileHeaderView: UIView {
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
+
+        imageView.clipsToBounds = true
         imageView.image = imageContent
         imageView.contentMode = .scaleAspectFit
-        imageView.clipsToBounds = true
         imageView.layer.borderWidth = 3
         imageView.layer.borderColor = UIColor.white.cgColor
+        imageView.layer.cornerRadius = Constants.imageSize / 2
+
         return imageView
     }()
 
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Carlo Brooney"
+
+        label.text = Constants.userName
         label.font = UIFont.systemFont(ofSize: 18.0, weight: .bold)
         label.textColor = .black
+
         return label
     }()
 
     private lazy var statusLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+
         label.text = Constants.userStatusPlaceholder
         label.font = UIFont.systemFont(ofSize: 14.0, weight: .regular)
         label.textColor = .gray
+
         return label
     }()
 
     private lazy var statusButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Set status", for: .normal)
+
+        button.setTitle(Constants.buttonStatusTitle, for: .normal)
         button.setTitleColor(.white, for: .normal)
         if #available(iOS 15.0, *) {
             button.configuration = .filled()
@@ -52,7 +62,9 @@ final class ProfileHeaderView: UIView {
         button.layer.shadowOpacity = 0.7
         button.layer.shadowRadius = 4.0
         button.layer.shadowColor = UIColor.black.cgColor
+
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+
         return button
     }()
 
@@ -60,34 +72,61 @@ final class ProfileHeaderView: UIView {
         let textField = TextFieldWithPadding()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.layer.masksToBounds = true
+        textField.keyboardType = .alphabet
+        textField.autocorrectionType = .no
+
         textField.layer.backgroundColor = UIColor.white.cgColor
         textField.layer.borderColor = UIColor.black.cgColor
         textField.layer.borderWidth = 1.0
+        textField.layer.cornerRadius = 12.0
         textField.textColor = .black
         textField.font = UIFont.systemFont(ofSize: 15.0, weight: .regular)
-        textField.layer.cornerRadius = 12.0
-        textField.keyboardType = .alphabet
+
         textField.addTarget(self, action: #selector(statusTextChanged(_:)), for: .editingChanged)
+
         return textField
     }()
 
+    // MARK: - Lifecycle
+
     override init(frame: CGRect){
         super.init(frame: frame)
-        makeUI()
+        addSubviews()
+        setConstraints()
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        makeUI()
+        addSubviews()
+        setConstraints()
     }
 
-    private func makeUI() {
+    // MARK: - Action
+
+    @objc func buttonPressed() {
+        if userStatus.isEmpty {
+            statusLabel.text = Constants.userStatusPlaceholder
+        } else {
+            statusLabel.text = userStatus
+        }
+        statusTextEdit.resignFirstResponder()
+    }
+
+    @objc func statusTextChanged(_ textField: UITextField) {
+        userStatus = textField.text ?? ""
+    }
+
+    // MARK: - Private
+
+    private func addSubviews() {
         addSubview(imageView)
         addSubview(nameLabel)
         addSubview(statusLabel)
         addSubview(statusButton)
         addSubview(statusTextEdit)
+    }
 
+    private func setConstraints() {
         NSLayoutConstraint.activate([
             imageView.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
@@ -102,8 +141,10 @@ final class ProfileHeaderView: UIView {
             ),
             imageView.widthAnchor.constraint(
                 equalToConstant: Constants.imageSize
-            ),
+            )
+        ])
 
+        NSLayoutConstraint.activate([
             nameLabel.leadingAnchor.constraint(
                 equalTo: imageView.trailingAnchor,
                 constant: Constants.moduleSize
@@ -111,16 +152,20 @@ final class ProfileHeaderView: UIView {
             nameLabel.topAnchor.constraint(
                 equalTo: topAnchor,
                 constant: 27.0
-            ),
+            )
+        ])
 
+        NSLayoutConstraint.activate([
             statusLabel.leadingAnchor.constraint(
                 equalTo: nameLabel.leadingAnchor
             ),
             statusLabel.bottomAnchor.constraint(
                 equalTo: imageView.bottomAnchor,
                 constant: -Constants.moduleSize - 2
-            ),
+            )
+        ])
 
+        NSLayoutConstraint.activate([
             statusButton.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
                 constant: Constants.moduleSize
@@ -135,8 +180,10 @@ final class ProfileHeaderView: UIView {
             ),
             statusButton.heightAnchor.constraint(
                 equalToConstant: 50.0
-            ),
+            )
+        ])
 
+        NSLayoutConstraint.activate([
             statusTextEdit.leadingAnchor.constraint(
                 equalTo: nameLabel.leadingAnchor
             ),
@@ -152,20 +199,6 @@ final class ProfileHeaderView: UIView {
                 equalToConstant: 40.0
             )
         ])
-
-        imageView.layer.cornerRadius = Constants.imageSize / 2
-    }
-
-    @objc func buttonPressed() {
-        if userStatus.isEmpty {
-            statusLabel.text = Constants.userStatusPlaceholder
-        } else {
-            statusLabel.text = userStatus
-        }
-    }
-
-    @objc func statusTextChanged(_ textField: UITextField) {
-        userStatus = textField.text ?? ""
     }
     
 }
