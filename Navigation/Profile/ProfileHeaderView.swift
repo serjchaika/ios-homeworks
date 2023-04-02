@@ -193,7 +193,7 @@ final class ProfileHeaderView: UIView {
             ),
             statusTextEdit.topAnchor.constraint(
                 equalTo: statusLabel.bottomAnchor,
-                constant: Constants.moduleSize / 2
+                constant: Constants.halfModuleSize
             ),
             statusTextEdit.heightAnchor.constraint(
                 equalToConstant: 40.0

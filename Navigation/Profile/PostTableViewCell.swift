@@ -65,6 +65,9 @@ final class PostTableViewCell: UITableViewCell {
         configureView()
         addSubviews()
         setConstraints()
+
+        print("contentView: \(contentView.frame.width), \(contentView.frame.height)")
+
     }
 
     required init?(coder: NSCoder) {
@@ -108,7 +111,7 @@ final class PostTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             postImageView.topAnchor.constraint(
                 equalTo: postTitleLabel.bottomAnchor,
-                constant: Constants.moduleSize - 4
+                constant: Constants.innerPaddings
             ),
             postImageView.widthAnchor.constraint(
                 equalTo: contentView.widthAnchor

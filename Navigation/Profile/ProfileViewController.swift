@@ -2,11 +2,15 @@ import UIKit
 
 final class ProfileViewController: UIViewController {
 
+    // MARK: - Data
+
     fileprivate let data = Post.pull()
+    fileprivate let photos = Photo.pull()
 
     private enum CellReuseID: String {
         case postCell = "postTableViewCell_ReuseID"
         case headerCell = "headerTableViewCell_ReuseID"
+        case photosCell = "photosTableViewCell_ReuseID"
     }
 
     // MARK: - Subviews
@@ -36,6 +40,16 @@ final class ProfileViewController: UIViewController {
         setConstraints()
         configureTableView()
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = true
+    }
+
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//        print("tableView: \(tableView.bounds.size.width), \(tableView.bounds.size.height)")
+//    }
 
     // MARK: - Private
 
@@ -67,12 +81,17 @@ final class ProfileViewController: UIViewController {
     }
 
     private func configureTableView() {
-        tableView.estimatedRowHeight = 500.0
+        tableView.estimatedRowHeight = 10.0
         tableView.rowHeight = UITableView.automaticDimension
 
         tableView.register(
             PostTableViewCell.self,
             forCellReuseIdentifier: CellReuseID.postCell.rawValue
+        )
+
+        tableView.register(
+            PhotosTableViewCell.self,
+            forCellReuseIdentifier: CellReuseID.photosCell.rawValue
         )
 
         tableView.register(
@@ -90,10 +109,27 @@ final class ProfileViewController: UIViewController {
 extension ProfileViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        data.count
+        data.count + 1
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        guard let photoCell = tableView.dequeueReusableCell(
+            withIdentifier: CellReuseID.photosCell.rawValue,
+            for: indexPath
+        ) as? PhotosTableViewCell else {
+            fatalError("could not dequeueReusableCell")
+        }
+
+        if indexPath.row == 0 {
+            var photosInBlock = 4
+            if photos.count < photosInBlock {
+                photosInBlock = photos.count
+            }
+            photoCell.pushContent(photos.prefix(photosInBlock))
+
+            return photoCell
+        }
 
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: CellReuseID.postCell.rawValue,
@@ -102,7 +138,7 @@ extension ProfileViewController: UITableViewDataSource {
             fatalError("could not dequeueReusableCell")
         }
 
-        cell.update(data[indexPath.row])
+        cell.update(data[indexPath.row - 1])
 
         return cell
     }
@@ -121,4 +157,13 @@ extension ProfileViewController: UITableViewDataSource {
 
 extension ProfileViewController: UITableViewDelegate {
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.row {
+        case 0:
+            navigationController?.pushViewController(PhotosViewController(), animated: true)
+        default:
+            return
+        }
+    }
+    
 }
