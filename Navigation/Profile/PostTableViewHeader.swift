@@ -1,11 +1,18 @@
 import UIKit
 
+protocol PostTableViewHeaderDelegate: AnyObject {
+    func profileImagePressed()
+}
+
 final class PostTableViewHeader: UITableViewHeaderFooterView {
+
+    weak var delegateProfile: ProfileViewControllerDelegate?
 
     // MARK: - Subviews
 
     private lazy var profileView: ProfileHeaderView = {
         let profileView = ProfileHeaderView()
+        profileView.delegateHeaderView = self
 
         profileView.translatesAutoresizingMaskIntoConstraints = false
         profileView.backgroundColor = .systemGray4
@@ -49,5 +56,11 @@ final class PostTableViewHeader: UITableViewHeaderFooterView {
                 equalTo: contentView.bottomAnchor
             )
         ])
+    }
+}
+
+extension PostTableViewHeader: PostTableViewHeaderDelegate {
+    func profileImagePressed() {
+        delegateProfile?.showLargeImageLayer()
     }
 }

@@ -51,8 +51,6 @@ class PhotosTableViewCell: UITableViewCell {
         addSubviews()
         setConstraints()
 
-        print("photosStackView: \(photosStackView.frame.width) \(photosStackView.frame.height)")
-
     }
     
     required init?(coder: NSCoder) {

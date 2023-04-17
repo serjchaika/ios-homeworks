@@ -1,6 +1,11 @@
 import UIKit
 
+
 final class ProfileHeaderView: UIView {
+
+    weak var delegateHeaderView: PostTableViewHeaderDelegate?
+
+    private lazy var userStatus: String = ""
 
     // MARK: - Subviews
 
@@ -9,9 +14,7 @@ final class ProfileHeaderView: UIView {
         return image
     }()
 
-    private lazy var userStatus: String = ""
-
-    private lazy var imageView: UIImageView = {
+    lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
 
@@ -21,6 +24,14 @@ final class ProfileHeaderView: UIView {
         imageView.layer.borderWidth = 3
         imageView.layer.borderColor = UIColor.white.cgColor
         imageView.layer.cornerRadius = Constants.imageSize / 2
+
+        imageView.isUserInteractionEnabled = true
+        let tapProfileImage = UITapGestureRecognizer(
+            target: self, 
+            action: #selector(didTapProfileImage)
+        )
+
+        imageView.addGestureRecognizer(tapProfileImage)
 
         return imageView
     }()
@@ -63,7 +74,7 @@ final class ProfileHeaderView: UIView {
         button.layer.shadowRadius = 4.0
         button.layer.shadowColor = UIColor.black.cgColor
 
-        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        button.addTarget(self, action: #selector(statusButtonPressed), for: .touchUpInside)
 
         return button
     }()
@@ -103,7 +114,7 @@ final class ProfileHeaderView: UIView {
 
     // MARK: - Action
 
-    @objc func buttonPressed() {
+    @objc private func statusButtonPressed() {
         if userStatus.isEmpty {
             statusLabel.text = Constants.userStatusPlaceholder
         } else {
@@ -112,8 +123,12 @@ final class ProfileHeaderView: UIView {
         statusTextEdit.resignFirstResponder()
     }
 
-    @objc func statusTextChanged(_ textField: UITextField) {
+    @objc private func statusTextChanged(_ textField: UITextField) {
         userStatus = textField.text ?? ""
+    }
+
+    @objc private func didTapProfileImage() {
+        delegateHeaderView?.profileImagePressed()
     }
 
     // MARK: - Private
@@ -127,6 +142,7 @@ final class ProfileHeaderView: UIView {
     }
 
     private func setConstraints() {
+
         NSLayoutConstraint.activate([
             imageView.leadingAnchor.constraint(
                 equalTo: leadingAnchor,

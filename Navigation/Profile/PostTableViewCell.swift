@@ -66,8 +66,6 @@ final class PostTableViewCell: UITableViewCell {
         addSubviews()
         setConstraints()
 
-        print("contentView: \(contentView.frame.width), \(contentView.frame.height)")
-
     }
 
     required init?(coder: NSCoder) {
