@@ -9,6 +9,7 @@ struct Constants {
         size = moduleSize * 6.0
         return size
     }()
+    static let closeButtonSize: CGFloat = 32.0
     static let normalFontSize: CGFloat = 16.0
     static let smallFontSize: CGFloat = 14.0
     static let titleFontSize: CGFloat = 20.0

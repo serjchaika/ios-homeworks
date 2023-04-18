@@ -63,6 +63,7 @@ class PhotosViewController: UIViewController {
             collectionView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
         ])
+        
     }
 
     private func configureCollectionView() {
