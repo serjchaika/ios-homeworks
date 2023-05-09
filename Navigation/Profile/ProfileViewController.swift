@@ -1,4 +1,5 @@
 import UIKit
+import StorageService
 
 protocol ProfileViewControllerDelegate: AnyObject {
     func showLargeImageLayer()
@@ -104,6 +105,9 @@ final class ProfileViewController: UIViewController {
 
     private func configureView() {
         view.backgroundColor = .white
+        #if DEBUG
+        view.backgroundColor = .systemGreen
+        #endif
     }
 
     private func addSubviews() {
