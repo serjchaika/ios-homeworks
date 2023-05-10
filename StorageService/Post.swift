@@ -1,15 +1,19 @@
 import Foundation
 
-struct Post {
-    var title: String = ""
-    var author: String = ""
-    var description: String = ""
-    var image: String = ""
-    var likes: Int = 0
-    var views: Int = 0
+public struct Post {
+    public var title: String = ""
+    public var author: String = ""
+    public var description: String = ""
+    public var image: String = ""
+    public var likes: Int = 0
+    public var views: Int = 0
 }
 
-extension Post {
+public extension Post {
+
+    init(title: String) {
+        self.title = title
+    }
 
     static func pull() -> [Post] {
         [
