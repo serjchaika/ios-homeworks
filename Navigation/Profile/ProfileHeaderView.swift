@@ -1,4 +1,5 @@
 import UIKit
+import SnapKit
 
 
 final class ProfileHeaderView: UIView {
@@ -143,78 +144,35 @@ final class ProfileHeaderView: UIView {
 
     private func setConstraints() {
 
-        NSLayoutConstraint.activate([
-            imageView.leadingAnchor.constraint(
-                equalTo: leadingAnchor,
-                constant: Constants.moduleSize
-            ),
-            imageView.topAnchor.constraint(
-                equalTo: topAnchor,
-                constant: Constants.moduleSize
-            ),
-            imageView.heightAnchor.constraint(
-                equalToConstant: Constants.imageSize
-            ),
-            imageView.widthAnchor.constraint(
-                equalToConstant: Constants.imageSize
-            )
-        ])
+        imageView.snp.makeConstraints { (make) -> Void in
+            make.leading.top.equalTo(Constants.moduleSize)
+            make.width.height.equalTo(Constants.imageSize)
+        }
 
-        NSLayoutConstraint.activate([
-            nameLabel.leadingAnchor.constraint(
-                equalTo: imageView.trailingAnchor,
-                constant: Constants.moduleSize
-            ),
-            nameLabel.topAnchor.constraint(
-                equalTo: topAnchor,
-                constant: 27.0
-            )
-        ])
+        nameLabel.snp.makeConstraints { (make) -> Void in
+            make.leading.equalTo(imageView.snp.trailing).offset(Constants.moduleSize)
+            make.top.equalTo(27.0)
+        }
 
-        NSLayoutConstraint.activate([
-            statusLabel.leadingAnchor.constraint(
-                equalTo: nameLabel.leadingAnchor
-            ),
-            statusLabel.bottomAnchor.constraint(
-                equalTo: imageView.bottomAnchor,
-                constant: -Constants.moduleSize - 2
-            )
-        ])
+        statusLabel.snp.makeConstraints { (make) -> Void in
+            make.leading.equalTo(nameLabel)
+            make.bottom.equalTo(imageView).offset(-Constants.moduleSize - 2)
+        }
 
-        NSLayoutConstraint.activate([
-            statusButton.leadingAnchor.constraint(
-                equalTo: leadingAnchor,
-                constant: Constants.moduleSize
-            ),
-            statusButton.trailingAnchor.constraint(
-                equalTo: trailingAnchor,
-                constant: -Constants.moduleSize
-            ),
-            statusButton.topAnchor.constraint(
-                equalTo: statusTextEdit.bottomAnchor,
-                constant: Constants.moduleSize
-            ),
-            statusButton.heightAnchor.constraint(
-                equalToConstant: 50.0
-            )
-        ])
+        statusButton.snp.makeConstraints { (make) -> Void in
+            make.leading.equalTo(Constants.moduleSize)
+            make.trailing.equalTo(-Constants.moduleSize)
+            make.top.equalTo(statusTextEdit.snp.bottom).offset(Constants.moduleSize)
+            make.height.equalTo(50.0)
+        }
 
-        NSLayoutConstraint.activate([
-            statusTextEdit.leadingAnchor.constraint(
-                equalTo: nameLabel.leadingAnchor
-            ),
-            statusTextEdit.trailingAnchor.constraint(
-                equalTo: trailingAnchor,
-                constant: -Constants.moduleSize
-            ),
-            statusTextEdit.topAnchor.constraint(
-                equalTo: statusLabel.bottomAnchor,
-                constant: Constants.halfModuleSize
-            ),
-            statusTextEdit.heightAnchor.constraint(
-                equalToConstant: 40.0
-            )
-        ])
+        statusTextEdit.snp.makeConstraints { (make) -> Void in
+            make.leading.equalTo(nameLabel)
+            make.trailing.equalTo(statusButton)
+            make.top.equalTo(statusLabel.snp.bottom).offset(Constants.halfModuleSize)
+            make.height.equalTo(40.0)
+        }
+
     }
     
 }

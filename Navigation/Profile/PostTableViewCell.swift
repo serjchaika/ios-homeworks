@@ -1,5 +1,6 @@
 import UIKit
 import StorageService
+import iOSIntPackage
 
 final class PostTableViewCell: UITableViewCell {
 
@@ -166,9 +167,20 @@ final class PostTableViewCell: UITableViewCell {
 
     // MARK: - Public
 
+    func showFilteredImage(for outputImage: UIImage?) -> Void {
+        postImageView.image = outputImage
+    }
+
     func update(_ model: Post) {
         postTitleLabel.text = model.author
-        postImageView.image = UIImage(named: model.image)
+
+        let filteredImage = ImageProcessor()
+        filteredImage.processImage(
+            sourceImage: UIImage(named: model.image) ?? UIImage(),
+            filter: .gaussianBlur(radius: 30.0),
+            completion: showFilteredImage
+        )
+
         postTextLabel.text = model.description
         postLikesLabel.text = "Likes: \(model.likes)"
         postViewsLabel.text = "Views: \(model.views)"
